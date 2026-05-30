@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Trastes</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f0f0f0;
+    padding:20px;
+}
+
+.container{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    max-width:600px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+}
+
+input, button{
+    width:100%;
+    padding:15px;
+    font-size:22px;
+    margin-top:10px;
+    border-radius:10px;
+}
+
+button{
+    background:black;
+    color:white;
+}
+
+table{
+    width:100%;
+    margin-top:20px;
+    border-collapse:collapse;
+}
+
+th, td{
+    border:1px solid #ccc;
+    padding:10px;
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Calculadora de Trastes</h1>
+
+<label>Largo de escala</label>
+<input type="number" id="escala" value="65">
+
+<label>Cantidad de trastes</label>
+<input type="number" id="trastes" value="24">
+
+<button onclick="calcular()">Calcular</button>
+
+<table id="tabla">
+<tr>
+<th>Traste</th>
+<th>Distancia</th>
+<th>Desde Cejilla</th>
+</tr>
+</table>
+
+</div>
+
+<script>
+
+function calcular(){
+
+    let escala = parseFloat(document.getElementById("escala").value);
+    let trastes = parseInt(document.getElementById("trastes").value);
+
+    let tabla = document.getElementById("tabla");
+
+    tabla.innerHTML = `
+    <tr>
+    <th>Traste</th>
+    <th>Distancia</th>
+    <th>Desde Cejilla</th>
+    </tr>
+    `;
+
+    let largoActual = escala;
+    let total = 0;
+
+    for(let i=1;i<=trastes;i++){
+
+        let distancia = largoActual / 17.817;
+
+        total += distancia;
+
+        tabla.innerHTML += `
+        <tr>
+        <td>${i}</td>
+        <td>${distancia.toFixed(2)}</td>
+        <td>${total.toFixed(2)}</td>
+        </tr>
+        `;
+
+        largoActual -= distancia;
+    }
+}
+
+</script>
+
+</body>
+</html>
